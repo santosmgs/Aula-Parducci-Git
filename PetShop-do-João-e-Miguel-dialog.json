@@ -1,0 +1,399 @@
+{
+  "intents": [
+    {
+      "intent": "AgendamentoTosa",
+      "examples": [
+        {
+          "text": "Gostaria de fazer uma tosa no meu bichinho"
+        },
+        {
+          "text": "Gostaria de marcar uma tosa pro meu cachorro"
+        },
+        {
+          "text": "Oi, tem horarios disponiveis para fazer tosa?"
+        },
+        {
+          "text": "Ola queria tosar meu pet"
+        },
+        {
+          "text": "Olá, quero marcar uma tosa pro meu pet"
+        },
+        {
+          "text": "Quais horarios tem para fazer uma tosa no meu gato?"
+        },
+        {
+          "text": "Queria agendar uma tosa para o meu pet"
+        },
+        {
+          "text": "Queria marcar uma tosa pro meu gato"
+        },
+        {
+          "text": "Quero marcar um corte pro meu cachorro"
+        }
+      ],
+      "description": "Agendar a tosa tanto na máquina ou na tesoura"
+    },
+    {
+      "intent": "DiaDaSemana",
+      "examples": [
+        {
+          "text": "domingo"
+        },
+        {
+          "text": "final de semana"
+        },
+        {
+          "text": "quarta"
+        },
+        {
+          "text": "quarta-feira"
+        },
+        {
+          "text": "quinta"
+        },
+        {
+          "text": "quinta-feira"
+        },
+        {
+          "text": "sábado"
+        },
+        {
+          "text": "segunda"
+        },
+        {
+          "text": "segunda-feira"
+        },
+        {
+          "text": "sexta"
+        },
+        {
+          "text": "sexta-feira"
+        },
+        {
+          "text": "terça"
+        },
+        {
+          "text": "terça-feira"
+        }
+      ],
+      "description": "responder os dias da semana"
+    },
+    {
+      "intent": "FormaPagamento",
+      "examples": [
+        {
+          "text": "Como deseja realizar o pagamento?"
+        },
+        {
+          "text": "Qual seria a forma de pagamento?"
+        }
+      ],
+      "description": "Definir a forma de pagamento"
+    }
+  ],
+  "entities": [
+    {
+      "entity": "animais",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "cachorro",
+          "synonyms": [
+            "auau",
+            "Border Collie",
+            "Bulldog",
+            "cachorrinho",
+            "cadela",
+            "cão",
+            "dog",
+            "Golden Retriever",
+            "husky",
+            "Pastor Alemão",
+            "pug",
+            " Rottweiler",
+            "rusky",
+            "Shih Tzu",
+            "shihtzu",
+            "shitizu",
+            "vira lata",
+            "Yorkshire",
+            "yorshire"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "gato",
+          "synonyms": [
+            "bichano",
+            "cat",
+            "felina",
+            "felino",
+            "gatinho",
+            "gatito",
+            "miuazinho",
+            "persa"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "fianlDeSemana",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "Domingo",
+          "synonyms": [
+            "final de semana"
+          ]
+        },
+        {
+          "type": "synonyms",
+          "value": "Sábado",
+          "synonyms": [
+            "final de semana"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "horario",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "tempo",
+          "synonyms": [
+            "10:00",
+            "10:30",
+            "11:00",
+            "11:30",
+            "12:00",
+            "12:30",
+            "13:00",
+            "13:30",
+            "14:00",
+            "14:30",
+            "15:00",
+            "15:30",
+            "16:00",
+            "16:30",
+            "17:00",
+            "17:30",
+            "18:00"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    },
+    {
+      "entity": "pagamento",
+      "values": [
+        {
+          "type": "synonyms",
+          "value": "pagamentos",
+          "synonyms": [
+            "boleto",
+            "cartão",
+            "crédito",
+            "débito",
+            "dinheiro",
+            "pix"
+          ]
+        }
+      ],
+      "fuzzy_match": true
+    }
+  ],
+  "metadata": {
+    "api_version": {
+      "major_version": "v2",
+      "minor_version": "2018-11-08"
+    }
+  },
+  "dialog_nodes": [
+    {
+      "type": "standard",
+      "title": "Bem-vindo",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Olá. Como posso te ajudar?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "welcome",
+      "dialog_node": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Em outros casos",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Não foi possível fazer o agendamento"
+              },
+              {
+                "text": "Não entendi, reformule a frase"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "anything_else",
+      "dialog_node": "Em outros casos",
+      "previous_sibling": "node_8_1678881409700",
+      "disambiguation_opt_out": true
+    },
+    {
+      "type": "standard",
+      "title": "Escolher os dias da semana",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual horário?"
+              },
+              {
+                "text": "Que horário seria de sua preferência?"
+              },
+              {
+                "text": "Que horas?"
+              },
+              {
+                "text": "E que horas você quer?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1678882299107",
+      "conditions": "#DiaDaSemana",
+      "dialog_node": "node_10_1678883475902"
+    },
+    {
+      "type": "standard",
+      "title": "pagamento",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "O valor é de 50 reais, pague no local. E você já está agendado."
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_5_1680088806816",
+      "conditions": "@pagamento",
+      "dialog_node": "node_1_1680088936912"
+    },
+    {
+      "type": "standard",
+      "title": "horario marcado",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Certo, qual a forma de pagamento?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_10_1678883475902",
+      "conditions": "@horario",
+      "dialog_node": "node_5_1680088806816"
+    },
+    {
+      "type": "standard",
+      "title": "Resposta para tosa",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Qual seria o seu animal?"
+              },
+              {
+                "text": "É gato ou cachorro?"
+              },
+              {
+                "text": "Qual é o seu pet?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "conditions": "#AgendamentoTosa",
+      "dialog_node": "node_8_1678881409700",
+      "previous_sibling": "Bem-vindo"
+    },
+    {
+      "type": "standard",
+      "title": "Cachorro e Gato",
+      "output": {
+        "generic": [
+          {
+            "values": [
+              {
+                "text": "Para qual dia da semana gostaria de agendar a tosa?"
+              },
+              {
+                "text": "Qual dia da semana seria mais acessível para você?"
+              }
+            ],
+            "response_type": "text",
+            "selection_policy": "sequential"
+          }
+        ]
+      },
+      "parent": "node_8_1678881409700",
+      "conditions": "@animais:cachorro || @animais:gato",
+      "dialog_node": "node_8_1678882299107"
+    }
+  ],
+  "counterexamples": [],
+  "system_settings": {
+    "disambiguation": {
+      "prompt": "Você quis dizer:",
+      "enabled": true,
+      "randomize": true,
+      "max_suggestions": 5,
+      "suggestion_text_policy": "title",
+      "none_of_the_above_prompt": "Nenhuma das anteriores",
+      "single_answer_clarification_prompt": "Something else"
+    },
+    "human_agent_assist": {
+      "prompt": "Você quis dizer:"
+    },
+    "intent_classification": {
+      "training_backend_version": "v2"
+    }
+  },
+  "learning_opt_out": false,
+  "language": "pt-br",
+  "description": "Agendar horário para serviços e tirar duvida",
+  "name": "PetShop do João e Miguel-dialog"
+}
